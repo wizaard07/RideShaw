@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-const { validate } = require('./city');
+const { validate } = require('./entry');
 
 
 const userSchema = new mongoose.Schema({

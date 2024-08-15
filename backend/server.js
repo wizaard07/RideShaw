@@ -1,6 +1,6 @@
 var express = require('express');
 var authRoutes = require('./routes/auth.routes');
-var entryRoutes = require('./routes/city.routes');
+var entryRoutes = require('./routes/entry.routes');
 const connectDB = require('./config/db.js');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');

@@ -7,9 +7,10 @@ router = express.Router();
 
 router.post('/add',verifyuser, addEntry);
 router.get('/get',verifyuser, getEntries);
+router.get('/get/:id',verifyuser, getEntry)
 router.delete('/delete/:id',verifyuser, deleteEntry);
 router.post('/req/send',verifyuser, sendRequest);
-router.post('/req/verify',verifyuser, verifyRequest);
+router.put('/req/verify/:id',verifyuser, verifyRequest);
 
 
 module.exports = router;

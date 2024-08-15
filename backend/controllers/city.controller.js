@@ -1,4 +1,4 @@
-var Entry = require('../models/city.js');
+var Entry = require('../models/entry.js');
 var User = require('../models/user.js');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
@@ -39,8 +39,35 @@ exports.addEntry = async (req, res) => {
     }
 }
 
+exports.getEntry = async (req, res) => {
+    try {
+        let id = req.params.id;
+        let entry = await Entry.findById(id);
+
+        output = {
+            city_name: entry.city_name,
+            time: entry.time,
+            reciver: entry.reciver,
+            count: entry.count,
+        }
+
+        let token = req.cookies.token;
+        let userid = jwt.verify(token, SECRET_KEY).userId;
+        
+        if(userid in entry.users){
+            console.log('yes')
+        }
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+    
+}
+
 
 exports.getEntries = async (req, res) => {
+
     try {
         let city = req.query.city_name;
         let time = req.query.time;
@@ -143,7 +170,6 @@ exports.sendRequest = async (req, res) => {
         console.log(error);
         return res.status(500).json({ error: 'Internal server error' });
     }
-
 }
 
 
@@ -157,34 +183,42 @@ module.exports.verifyRequest = async (req, res) => {
             return res.status(404).json({ error: 'Not authorised user' });
         }
 
-        let entry = await Entry.findById(req.body.id);
+        let request = await req.params.id;
+        let entry = await Entry.findOne({reciver : user});
 
+        
         if (!entry) {
-            return res.status(404).json({ error: 'Entry not found' });
+            return res.status(404).json({ error: 'You do not have any entry' });
         }
 
-        let reciver = entry.reciver
+        // change the request id grantee to true
+        // console.log(entry)
+        // console.log(entry.users)
+        // console.log(request)
 
-        console.log(entry)
-
-        if (reciver.equals(user._id)) {
-            let index = entry.users.findIndex((x) => x.userID.equals(req.body.userID));
-            console.log(index)
-            entry.users[index].granted = true;
-            let save = await entry.save();
-            return res.status(200).json({ message: 'Request verified successfully' });
+        for(let i=0; i < entry.users.length; i++){
+            if(request == entry.users[i]._id.toString()){
+                entry.users[i].granted = true;
+                let save = await entry.save();
+                return res.status(200).json({ message: 'Request granted successfully' });
+            }
         }
 
-        else {
-            return res.status(400).json({ error: 'You are not authorised to verify this request ' });
-        }
-
+        // if(entry[0].users[request].granted == false){
+        //     entry.users[request].granted = true;
+        //     let save = await entry.save();
+        //     return res.status(200).json({ message: 'Request granted successfully' });
+        // }
+        // else{
+        //     return res.status(400).json({ error: 'Request already granted' });
+        // }
+    
     }
     
-        catch (error) {
-            console.log(error);
-            return res.status(500).json({ error: 'Internal server error' });
-        }
+    catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
 
 }
 
