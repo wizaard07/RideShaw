@@ -6,30 +6,43 @@ const citySchema = new mongoose.Schema({
         required: true,
         enum : ['Nadiad','Anand','Vidhyanagar']
     },
+
     count:{
         type: Number,
         required: true,
         default: 1,
         max : 4
-    },
+    }, 
+
     time:{
         type: String,
         required: true,
         enum : ['Morning','Afternoon','Evening','Night']
     },
-    timestamp: {
-        type: Date,
-        default: Date.now
+
+    reciver : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
-    user: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'User',
-        required: false
-    },
-    
+
+    users: [{
+        
+        userID: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        },
+
+        granted: {
+            type: Boolean,
+            default: false
+        }
+    }]
+
+}, {
+    timestamps: true
 });
 
-const City = mongoose.model('City', citySchema);
+const City = mongoose.model('entry', citySchema);
 module.exports = City;
 
 
