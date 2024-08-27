@@ -1,11 +1,21 @@
-import React from 'react'
+import React from 'react';
 
-const Navbar = () => {
+function Navbar() {
   return (
-    <div>
-      <h1>hello</h1>
-    </div>
-  )
+    <header className="navbar">
+      <a href="/"><div className="logo">Paisaa Vasool</div></a>
+      <nav>
+        <a href="#">Solutions</a>
+        <a href="#">Industries</a>
+        <a href="#">Fees</a>
+        <a href="#">About Rareblocks</a>
+      </nav>
+      <div className="auth-buttons">
+        <a href="/signin">Sign in</a>
+        <a href="/signup">Create account</a>
+      </div>
+    </header>
+  );
 }
 
-export default Navbar
+export default Navbar;

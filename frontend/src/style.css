@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+}
+
+.left-section {
+    max-width: 50%;
+}
+
+.left-section h1 {
+    font-size: 48px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.left-section p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    color: #777;
+}
+
+.email-form {
+    display: flex;
+    max-width: 400px;
+}
+
+.email-form input[type="email"] {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
+
+.email-form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.stats {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    font-weight: 600;
+    color: #555;
+}
+
+.right-section {
+    max-width: 40%;
+    text-align: right;
+}
+
+.right-section img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.navbar {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.navbar nav a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.navbar .auth-buttons a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
