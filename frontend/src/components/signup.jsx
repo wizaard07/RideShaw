@@ -12,24 +12,25 @@ const SignUp = () => {
                 <p className="text-center text-3xl">Join Us</p>
                 <form className="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
                     <div className="flex flex-col pt-4">
-                        <label for="name" className="text-lg">Name</label>
-                        <input type="text" id="name" placeholder="John Smith" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                        <label for="useranme" className="text-lg">Name</label>
+                        <input type="text" id="username" name='username' placeholder="John Smith" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                     </div>
 
                     <div className="flex flex-col pt-4">
                         <label for="email" className="text-lg">Email</label>
                         <input type="email" id="email" placeholder="your@email.com" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                     </div>
-    
+
+                    <div className="flex flex-col pt-4">
+                        <label for="contact" className="text-lg">Contact</label>
+                        <input type="contact" id="contact" placeholder="Contact" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
+                    </div>
+
                     <div className="flex flex-col pt-4">
                         <label for="password" className="text-lg">Password</label>
                         <input type="password" id="password" placeholder="Password" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
                     </div>
 
-                    <div className="flex flex-col pt-4">
-                        <label for="confirm-password" className="text-lg">Confirm Password</label>
-                        <input type="password" id="confirm-password" placeholder="Password" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" />
-                    </div>
     
                     <input type="submit" value="Register" className="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8" />
                 </form>
@@ -41,8 +42,7 @@ const SignUp = () => {
         </div>
 
         <div className="w-1/2 shadow-2xl">
-            <img className="object-cover w-full h-screen hidden md:block" src="https://source.unsplash.com/IXUM4cJynP0" alt="Background" />
-        </div>
+        <img className="object-cover w-full h-screen hidden md:block" src="https://media.istockphoto.com/id/1041476372/photo/online-payment-authorization-mobile-phone-password.jpg?s=2048x2048&w=is&k=20&c=88TgU5R7or0jmOFA7P31SmdALoi77TMzmvInbt6aH3M=" alt="backgruond" />        </div>
     </div>
 
 </body>

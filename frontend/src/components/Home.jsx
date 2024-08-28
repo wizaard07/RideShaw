@@ -1,4 +1,5 @@
 import React from 'react'
+import imageName from '../mainpage.jpg';
 
 const Home = () => {
 
@@ -17,10 +18,9 @@ const Home = () => {
             </div>
         </div>
         <div className="right-section">
-            <img src="https://via.placeholder.com/300" alt="Credit Card Image"/>
+            <img src={imageName} alt="Rikshaw"/>
         </div>
     </section>
-
   )
 }
 

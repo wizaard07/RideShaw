@@ -3,16 +3,17 @@ import React from 'react';
 function Navbar() {
   return (
     <header className="navbar">
-      <a href="/"><div className="logo">Paisaa Vasool</div></a>
+      <a href="/"><div className="logo">RideShaw</div></a>
       <nav>
-        <a href="#">Solutions</a>
-        <a href="#">Industries</a>
-        <a href="#">Fees</a>
-        <a href="#">About Rareblocks</a>
+        <a href="#a">Solutions</a>
+        <a href="#a">Industries</a>
+        <a href="#a">Fees</a>
+        <a href="#a">About Rareblocks</a>
       </nav>
-      <div className="auth-buttons">
-        <a href="/signin">Sign in</a>
-        <a href="/signup">Create account</a>
+      {/* Make darker on hover */}
+      <div className="auth-buttons" >
+        <a href="/signin" >Sign in</a>
+        <a href="/signup" >Create account</a>
       </div>
     </header>
   );
