@@ -4,11 +4,13 @@ var entryRoutes = require('./routes/entry.routes');
 const connectDB = require('./config/db.js');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+const cors = require('cors');
 dotenv.config();
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 

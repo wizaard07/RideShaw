@@ -35,7 +35,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-
+        console.log(req.body)
         let user = await User.findOne({ email: req.body.email })
         if (!user) {
             console.log("no user")
