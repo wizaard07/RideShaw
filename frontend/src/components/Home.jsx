@@ -7,11 +7,12 @@ const Home = () => {
       <main>
         <section className="container">
           <div className="left-section">
-            <h1>Traveling Alone?</h1>
+            <h1>Travelling Alone?</h1>
             <p>Join RideShaw! Enjoy a comfortable, eco-friendly ride while saving money and making new friends. Discover the joy of shared travel today!</p>
             <div className="cta-buttons">
-              <button className="cta-button">Book Your Ride Now</button>
-              <button className="cta-button secondary">Learn More</button>
+              {/* change location when pressed */}
+              <button className="cta-button" onClick={(e)=>{window.location.href="/entry"; e.preventDefault(); }}>Book Your Ride Now</button>
+              <button className="cta-button secondary"onClick={(e)=>{window.location.href="/entries"; e.preventDefault(); }}>Let's Go</button>
             </div>
           </div>
           <div className="right-section">

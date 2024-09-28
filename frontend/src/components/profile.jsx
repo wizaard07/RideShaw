@@ -35,13 +35,13 @@ const UserProfile = () => {
             <button className="btn btn-secondary">
               <img src={user.profilePicture || "https://i.imgur.com/wvxPV9S.png"} alt="profile pic" height="100" width="100" />
             </button>
-            <span className="name mt-3">{user.username}</span>
-            <span className="idd">{user.email}</span>
+            <span className="name mt-3">{user.username || "John Doe"}</span>
+            <span className="idd">{user.email || "john@gm.com"}</span>
             <div className="d-flex mt-2">
               <button className="btn btn-dark">Edit Profile</button>
             </div>
             <div className="text mt-3">
-              <span>{user.contact}</span>
+              <span>{user.contact || "984324374"}</span>
             </div>
             <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
               <span><i className="fa fa-twitter"></i></span>

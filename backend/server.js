@@ -1,6 +1,7 @@
 var express = require('express');
 var authRoutes = require('./routes/auth.routes');
 var entryRoutes = require('./routes/entry.routes');
+var userRoutes = require('./routes/user.routes');
 const connectDB = require('./config/db.js');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/entry', entryRoutes);
+app.use('/api/user', userRoutes);
 
 
 app.get('/', (req, res) => {
@@ -24,7 +26,6 @@ app.get('/', (req, res) => {
 );
 
 app.listen(3001, () => {
-    console.log('MONGO_URI:', process.env.DB_URL);
     console.log('Server is running on http://localhost:3001');
     connectDB();
     }

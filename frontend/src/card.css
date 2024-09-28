@@ -1,0 +1,39 @@
+/* Card.css */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 0;
+  color: #666;
+}
+
+.request-to-join-button {
+  background-color: #0e1a0e; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 10px 20px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Get it to display inline */
+  font-size: 16px; /* Increase font size */
+  margin-top: 10px; /* Some margin on top */
+  cursor: pointer; /* Pointer/hand icon on hover */
+}
+
+.request-to-join-button:hover {
+  background-color: #050e06; /* Darker green on hover */
+}

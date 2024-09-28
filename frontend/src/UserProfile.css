@@ -6,9 +6,7 @@
 
 .card {
     /* card should be at mid of page */
-
-    margin: 5 auto;
-
+    margin: 1 auto;
     margin-top: 100px;
     width: 350px;
     background-color: #efefef;

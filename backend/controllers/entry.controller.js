@@ -39,6 +39,18 @@ exports.addEntry = async (req, res) => {
     }
 }
 
+
+exports.test = async (req, res) => {
+    try {
+        let entries = await Entry.find();
+        return res.status(200).json(entries);
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
 exports.getEntry = async (req, res) => {
     try {
         let id = req.params.id;
@@ -53,7 +65,6 @@ exports.getEntry = async (req, res) => {
 
         let token = req.cookies.token;
         let userid = jwt.verify(token, SECRET_KEY).userId;
-        
         if(userid in entry.users){
             console.log('yes')
         }
@@ -69,8 +80,10 @@ exports.getEntry = async (req, res) => {
 exports.getEntries = async (req, res) => {
 
     try {
-        let city = req.query.city_name;
-        let time = req.query.time;
+        let city = await req.query.city_name;
+        let time = await req.query.time;
+
+        console.log("time"+time)
 
         if (city && time) {
             let entries = await Entry.find({ city_name: city, time: time });
@@ -92,6 +105,15 @@ exports.getEntries = async (req, res) => {
 
         else if(time){
             let entries = await Entry.find({ time : time });
+
+            let response = []
+
+            entries.forEach(async(element) =>{
+                console.log(element.reciver.toString())
+                let reciver = await User.findById(element.reciver.toString())
+                console.log(reciver.username)
+            });           
+
             if (entries) {
                 return res.status(200).json(entries);
             } else {

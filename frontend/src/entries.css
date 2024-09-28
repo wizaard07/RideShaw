@@ -1,0 +1,22 @@
+/* Entries.css */
+.city-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 50px 0;
+  }
+  
+  .loading {
+    color: #007bff;
+  }
+  
+  .error {
+    color: #dc3545;
+  }
+  

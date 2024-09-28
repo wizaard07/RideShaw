@@ -36,3 +36,50 @@
     transform: rotate(360deg);
   }
 }
+
+/* src/App.css or corresponding CSS file */
+
+.city-time-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.city-time-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.city-time-form label {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.city-time-form select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.city-time-form .submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.city-time-form .submit-button:hover {
+  background-color: #333;
+}

@@ -7,7 +7,9 @@ import './style.css';
 import Navbar from './components/navbar';
 import UserProfile from './components/profile';
 import UserState from './context/userState';
-
+import AddEntry from './components/addEntry';
+// import Counter from './counter';
+import Entries from './components/cards';
 
 function App() {
   return (
@@ -15,14 +17,19 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/entry" element={<> <AddEntry /> </>} />
         <Route path="/profile" element={<> <UserProfile/> </>} />
         <Route path="/" element={<> <Home /></>} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        {/* <Route path="/counter" element={<Counter />} /> */}
+        <Route path="/entries" element={<Entries />} />
       </Routes>
     </Router>
     </UserState>
-
+    // <>
+    // <Counter/>
+    // </>
   );
 }
 

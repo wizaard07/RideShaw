@@ -30,7 +30,6 @@ const SignUp = () => {
         }
     }
 
-
     const onChange = (e) => {
         setCredentials({...credentials, [e.target.name]: e.target.value})
     }

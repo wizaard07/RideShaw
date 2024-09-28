@@ -7,9 +7,9 @@ SECRET_KEY = "This_is_the_secret@auth_key"
 exports.register = async (req, res) => {
     
     try{
-        console.log('REQ BODY ON REGISTER CONTROLLER', req.body);
+        // console.log('REQ BODY ON REGISTER CONTROLLER', req.body);
         let user = await req.body;
-        console.log(user)
+        // console.log(user)
         if (await User.findOne({ email : user.email })) {
             return res.status(400).json({ error: 'User already exists'  });
         }
@@ -35,7 +35,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        console.log(req.body)
+        // console.log(req.body)
         let user = await User.findOne({ email: req.body.email })
         if (!user) {
             console.log("no user")
@@ -57,7 +57,6 @@ exports.login = async (req, res) => {
         generateToken(res, user.id)
         console.log("logged in")
         return res.status(200).json({ success: "logged in" })
-
     } 
     catch (error) {
         console.log(error)
