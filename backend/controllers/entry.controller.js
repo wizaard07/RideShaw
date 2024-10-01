@@ -7,7 +7,7 @@ SECRET_KEY = process.env.JWT_SECRET;
 
 exports.addEntry = async (req, res) => {
     try {
-        console.log(req.body)
+        // console.log(req.body)
         let entry = {}
         let token = req.cookies.token;
         console.log(token)
@@ -23,7 +23,7 @@ exports.addEntry = async (req, res) => {
         entry.reciver = user;
         entry.time = await req.body.time;
 
-        console.log(entry)
+        // console.log(entry)
 
         let create = await Entry.create(entry);
 
@@ -83,7 +83,7 @@ exports.getEntries = async (req, res) => {
         let city = await req.query.city_name;
         let time = await req.query.time;
 
-        console.log("time"+time)
+        // console.log("time"+time)
 
         if (city && time) {
             let entries = await Entry.find({ city_name: city, time: time });
