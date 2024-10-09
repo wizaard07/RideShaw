@@ -245,3 +245,7 @@ module.exports.verifyRequest = async (req, res) => {
 }
 
 
+exports.getReq = async () => {
+    let user = req.user
+    
+}

@@ -10,6 +10,7 @@ import UserState from './context/userState';
 import AddEntry from './components/addEntry';
 // import Counter from './counter';
 import Entries from './components/cards';
+import Pending from './components/pending'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         {/* <Route path="/counter" element={<Counter />} /> */}
         <Route path="/entries" element={<Entries />} />
+        <Route path="/pending" element={<Pending />} />
       </Routes>
     </Router>
     </UserState>

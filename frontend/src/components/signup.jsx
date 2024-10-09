@@ -18,9 +18,7 @@ const SignUp = () => {
         });
 
         const json = await response.json()
-        console.log(json.messsage)
-
-                    
+        console.log(json)
         
         if(json.messsage === "User created successfully"){
             navigate('/')

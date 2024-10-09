@@ -14,6 +14,7 @@ const verifyuser = async (req, res, next) => {
     try {
         const data = jwt.verify(token, SECRET);
         req.user = data.user;
+        console.log("req.user", req.user);
         next();
     } catch (error) {
         console.log(error);

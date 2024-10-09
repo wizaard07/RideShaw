@@ -29,6 +29,7 @@ exports.getUserEntry = async (req, res) => {
         let token = req.cookies.token;
         let id = jwt.verify(token, SECRET_KEY).userId;
         let user = await User.findById(id);
+        console.log("getuserentry")
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });

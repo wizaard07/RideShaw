@@ -3,7 +3,8 @@
     grid-template-columns: 1fr 2fr; /* Slightly reduce the width of the entries list column */
     gap: 10px; /* Maintain a small gap between the profile card and entries list */
     padding: 20px;
-    margin-top: 60px;
+    margin-top: 10px;
+    margin-left: 10px;
     min-height: 100vh;
     justify-content: center; /* Center both elements horizontally */
     align-items: center; /* Center them vertically */
@@ -13,6 +14,7 @@
     background-color: #efefef;
     border: none;
     padding: 20px;
+    margin-left: 50px;
     height: fit-content;
     min-height: 70%;
     max-width: 400px; /* Keep the original max-width of the profile card */
