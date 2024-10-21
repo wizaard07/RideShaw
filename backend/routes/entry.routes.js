@@ -8,7 +8,7 @@ router.post('/add',verifyuser, addEntry);
 router.get('/get', getEntries);
 router.get('/get/:id',verifyuser, getEntry)
 router.delete('/delete/:id',verifyuser, deleteEntry);
-router.post('/req/send',verifyuser, sendRequest);
+router.post('/req/send/:id',verifyuser, sendRequest);
 router.put('/req/verify/:id',verifyuser, verifyRequest);
 
 

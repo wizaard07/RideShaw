@@ -1,53 +1,55 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Card from './card';
-import axios from 'axios';
 import '../entries.css';  // Add a separate CSS file for styling
-// import { useParams } from 'react-router-dom';
 
-const Entries = (props) => {
+const Entries = ({ user }) => {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true); // State for loading
   const [error, setError] = useState(null); // State for error handling
-  // const { userID } = useParams();
-  console.log(props.user)
 
   useEffect(() => {
     const fetchEntries = async () => {
       try {
+        if (user) {
+          console.log("Fetching user-specific entries");
+          const response = await fetch("http://localhost:3001/api/user/entry", {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          });
 
-        if(props.user !== null){
-          const response = await axios.get(`http://127.0.0.1:3001/api/user/entry`, 
-            {
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              credentials: 'include',
-            }
-          );
-          console.log("userdata", response.data)
-          setEntries(response.data);
-        }
-        else{
-          const response = await axios.get('http://127.0.0.1:3001/api/entry/get?time=Morning', 
-            {
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              credentials: 'include',
-            }
-          );
-          console.log("all data",response.data)
-          setEntries(response.data);
-        }
+          const res = await response.json()
+          console.log("User data:", res.entry);
+          setEntries(res.entry);
+        } 
         
+        else {
+          console.log("Fetching all entries");
+          const response = await fetch(`http://localhost:3001/api/entry/get?time=Morning`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          });
+
+          const res = await response.json()
+          console.log("All data:", res);
+          setEntries(res);
+        }
       } catch (err) {
+        console.error("Error fetching entries:", err);
         setError('Failed to fetch entries. Please try again.');
       } finally {
         setLoading(false);
       }
     };
+
     fetchEntries();
-  }, []);
+  }, [user]); // Depend on `user`
 
   if (loading) {
     return <div className="loading">Loading...</div>;
@@ -64,6 +66,11 @@ const Entries = (props) => {
       ))}
     </div>
   );
+};
+
+// Optional: PropTypes validation
+Entries.propTypes = {
+  user: PropTypes.object,
 };
 
 export default Entries;

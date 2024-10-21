@@ -26,16 +26,16 @@ exports.getUser = async (req, res) => {
 exports.getUserEntry = async (req, res) => {
 
     try {
-        let token = req.cookies.token;
-        let id = jwt.verify(token, SECRET_KEY).userId;
+        console.log("here")
+        let id = req.user
         let user = await User.findById(id);
-        console.log("getuserentry")
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
         let entry = await Entry.find({ reciver: user });
+        console.log(entry)
 
         return res.status(200).json({ entry: entry });
 
@@ -45,3 +45,21 @@ exports.getUserEntry = async (req, res) => {
     }
 }
 
+exports.getVerified = async (req, res) => {
+    let id = req.user
+
+    let entries = await Entry.find({reciver:id})
+
+    console.log(entries)
+
+    if(entries){
+        return res.status(200).json({ entry: entry });
+    }
+    else{
+        return  res.status()
+    }
+
+
+
+
+}

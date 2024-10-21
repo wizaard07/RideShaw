@@ -3,31 +3,51 @@ import Entries from './cards'; // Import the Entries component
 import '../UserProfile.css'; // Import the CSS file for styling
 
 const UserProfile = () => {
-  const [user,setUser] = useState([]);
+  const [user, setUser] = useState(null);  // Set initial state to null for user
+  const [loading, setLoading] = useState(true);  // Add loading state
 
-  useEffect(()=>{
-    const getData = async() => {
-      const response = await fetch("http://localhost:3001/api/user/get", {
-        method: 'GET',
-        headers: {
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/api/user/get", {
+          method: 'GET',
+          headers: {
             'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-    });
-    const json = await response.json()
-    setUser(json.user)
-    }
-    getData()
-    // console.log(user)
-  },[])
+          },
+          credentials: 'include',
+        });
+        const json = await response.json();
+        setUser(json.user);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>Error loading user data.</div>;
+  }
 
   return (
     <div className="profile-container">
       <div className="profile-card">
         <div className="image d-flex flex-column justify-content-center align-items-center">
           <button className="btn btn-secondary">
-            <img className="profile-pic"  src={user.profilePicture || "https://i.imgur.com/wvxPV9S.png"} alt="profile pic" height="100" width="100" />
-          </button> 
+            <img
+              className="profile-pic"
+              src={user.profilePicture || "https://i.imgur.com/wvxPV9S.png"}
+              alt="profile pic"
+              height="100"
+              width="100"
+            />
+          </button>
           <span className="name mt-3">{user.username}</span>
           <span className="idd">{user.email}</span>
 
@@ -51,7 +71,7 @@ const UserProfile = () => {
 
       {/* Right side list of entries */}
       <div className="entries-list">
-        <Entries user={user._id} />
+        {user._id && <Entries user={user._id} />} {/* Render Entries only if user._id exists */}
       </div>
     </div>
   );

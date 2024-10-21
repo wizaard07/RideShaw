@@ -10,10 +10,11 @@ exports.addEntry = async (req, res) => {
         // console.log(req.body)
         let entry = {}
         let token = req.cookies.token;
-        console.log(token)
+        // console.log(token)
         let id = jwt.verify(token, SECRET_KEY).userId;
-        console.log(id)
+        // console.log(id)
         let user = await User.findById(id);
+        console.log(user)
 
         if (!user) {
             return res.status(404).json({ error: 'Not authorised user' });
@@ -109,9 +110,9 @@ exports.getEntries = async (req, res) => {
             let response = []
 
             entries.forEach(async(element) =>{
-                console.log(element.reciver.toString())
+                // console.log(element.reciver.toString())
                 let reciver = await User.findById(element.reciver.toString())
-                console.log(reciver.username)
+                // console.log(reciver.username)
             });           
 
             if (entries) {
@@ -159,21 +160,22 @@ exports.deleteEntry = async (req, res) => {
 
 exports.sendRequest = async (req, res) => {
     try {
-        let token = req.cookies.token;
-        let id = jwt.verify(token, SECRET_KEY).userId;
+        let id = req.user
         let user = await User.findById(id);
 
         if (!user) {
             return res.status(404).json({ error: 'Not authorised user' });
         }
 
-        let entry = await Entry.findById(req.body.id);
+        let entry = await Entry.findById(req.param.id);
 
         if (!entry) {
             return res.status(404).json({ error: 'Entry not found' });
         }
 
         let reciver = entry.reciver
+
+        
 
         if(entry.count < 4){
             entry.users.push({ userID: user, granted: false });

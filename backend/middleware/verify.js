@@ -4,17 +4,18 @@ dotenv.config();
 const SECRET = process.env.JWT_SECRET;
 
 const verifyuser = async (req, res, next) => {
-    // console.log(req.cookies);
+    console.log(req.cookies);
     const token = await req.cookies.token;
-    console.log(token);
+    console.log("verifyuser",token);
     if (!token) {
         return res.status(401).json({ error: "Unauthorized" });
     }
     
     try {
         const data = jwt.verify(token, SECRET);
-        req.user = data.user;
-        console.log("req.user", req.user);
+        console.log("data from verify",data)
+        req.user = data.userId;
+        // console.log("req.user", req.user);
         next();
     } catch (error) {
         console.log(error);
