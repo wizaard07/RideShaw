@@ -24,10 +24,12 @@
 .profile-pic {
     width: 150px;
     height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
+    border-radius: 50%; /* Makes the image a perfect circle */
+    object-fit: cover; /* Ensures the image fits perfectly within the circle */
     display: block;
+    overflow: hidden; /* Ensures the image doesn't overflow from its container */
 }
+
 
 .entries-list {
 

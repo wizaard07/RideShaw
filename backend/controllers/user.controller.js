@@ -45,7 +45,7 @@ exports.getUserEntry = async (req, res) => {
     }
 }
 
-exports.getVerified = async (req, res) => {
+exports.getPending = async (req, res) => {
     let id = req.user
 
     let entries = await Entry.find({reciver:id})
@@ -58,8 +58,4 @@ exports.getVerified = async (req, res) => {
     else{
         return  res.status()
     }
-
-
-
-
 }

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Entries from './cards'; // Import the Entries component
 import '../UserProfile.css'; // Import the CSS file for styling
+import { useNavigate } from 'react-router-dom';  // Import the useNavigate hook
 
 const UserProfile = () => {
+  const navigate = useNavigate();  // Initialize the navigate function
   const [user, setUser] = useState(null);  // Set initial state to null for user
   const [loading, setLoading] = useState(true);  // Add loading state
 
@@ -42,7 +44,7 @@ const UserProfile = () => {
           <button className="btn btn-secondary">
             <img
               className="profile-pic"
-              src={user.profilePicture || "https://i.imgur.com/wvxPV9S.png"}
+              src={user.profilePicture || "https://via.placeholder.com/150?text=No+Image+Available"}  // Updated placeholder image URL
               alt="profile pic"
               height="100"
               width="100"
@@ -58,7 +60,7 @@ const UserProfile = () => {
             <button className="btn btn-dark">Edit Profile</button>
           </div>
           <div className="d-flex mt-2">
-            <button className="btn btn-dark">Check pending Requests</button>
+            <button className="btn btn-dark" onClick={() => { navigate('/pending'); }}>Check pending Requests</button>
           </div>
           <div className="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center">
             <span><i className="fa fa-twitter"></i></span>

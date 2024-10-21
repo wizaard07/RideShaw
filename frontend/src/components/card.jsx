@@ -8,6 +8,7 @@ const Card = ({ entry }) => {
       <p>{entry.description}</p>
       <p><strong>Time:</strong> {entry.time}</p>
       <p>Number of people: {entry.count}</p>
+      <p>Pending Request: {entry.count}</p>
       <button className="request-to-join-button">
         Request to Join
       </button>

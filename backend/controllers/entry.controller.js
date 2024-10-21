@@ -10,11 +10,9 @@ exports.addEntry = async (req, res) => {
         // console.log(req.body)
         let entry = {}
         let token = req.cookies.token;
-        // console.log(token)
         let id = jwt.verify(token, SECRET_KEY).userId;
-        // console.log(id)
         let user = await User.findById(id);
-        console.log(user)
+        // console.log(user)
 
         if (!user) {
             return res.status(404).json({ error: 'Not authorised user' });
