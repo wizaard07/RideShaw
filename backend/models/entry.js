@@ -25,18 +25,17 @@ const citySchema = new mongoose.Schema({
         ref: 'User'
     },
 
-    users: [{
-        
-        userID: {
+    users: [{   
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
-        },
+    }],
 
-        granted: {
-            type: Boolean,
-            default: false
+    pending: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
         }
-    }]
+    ]
 
 }, {
     timestamps: true
