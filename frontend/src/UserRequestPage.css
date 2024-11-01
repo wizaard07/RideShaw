@@ -63,3 +63,9 @@
     background-color: #f44336;
     color: white;
 }
+
+.request-details p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+}

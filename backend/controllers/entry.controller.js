@@ -205,8 +205,7 @@ exports.sendRequest = async (req, res) => {
             return res.status(404).json({ error: 'Entry not found' });
         }
         // console.log("entry", entry)
-        let receiver = entry.reciver;
-        console.log("reciever", receiver)
+        let receiver_id = entry.reciver;
 
         // Check entry limit and add user to pending if allowed
         if (entry.count < 4) {
@@ -226,6 +225,9 @@ exports.sendRequest = async (req, res) => {
                     rejectUnauthorized: false // Disable certificate validation for debugging
                 }
             });
+
+            let receiver = await User.findById(receiver_id.toHexString());
+            console.log("reciever", receiver)
 
             // Email options
             const mailOptions = {
@@ -261,9 +263,10 @@ exports.sendRequest = async (req, res) => {
 
 module.exports.verifyRequest = async (req, res) => {
     try {
-        const { grant, user_id: request } = req.body;
+        const { grant,  request } = req.body;
+        console.log("req.body", req.body)
         const id = req.user;
-        console.log("grant", grant)
+        // console.log("grant", grant)
 
         // Fetch the user by ID
         const user = await User.findById(id);
@@ -279,11 +282,12 @@ module.exports.verifyRequest = async (req, res) => {
 
         // Check if the request is in the pending list
         const index = entry.pending.indexOf(request);
+        console.log("index",index)
         if (index === -1) {
             return res.status(400).json({ error: 'Request not found' });
         }
 
-        if (grant === 'true' || grant === true) {
+        if ((grant === 'true' || grant === true ) ) {
             // Grant the request: remove from pending, add to users, and increment count
             entry.pending.splice(index, 1);
             entry.users.push(request);
@@ -291,14 +295,17 @@ module.exports.verifyRequest = async (req, res) => {
         } else if (grant === 'false' || grant === false) {
             // Deny the request: simply remove from pending
             entry.pending.splice(index, 1);
-        } else {
+        } else if (entry.count < 4){
+            return res.status(400).json({error: 'There are already 4 members'})
+        }
+        else {
             return res.status(400).json({ error: 'Invalid grant value' });
         }
 
         // Save the updated entry
         const save = await entry.save();
         if (save) {
-            const message = grant === 'true' ? 'Request granted successfully' : 'Request denied successfully';
+            const message = grant === true ? 'Request granted successfully' : 'Request denied successfully';
             return res.status(200).json({ message });
         } else {
             return res.status(400).json({ error: 'Failed to update request' });

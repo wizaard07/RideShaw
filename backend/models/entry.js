@@ -4,7 +4,7 @@ const citySchema = new mongoose.Schema({
     city_name: {
         type: String,
         required: true,
-        enum : ['Nadiad','Anand','Vidhyanagar']
+        enum : ['Nadiad','Anand','Vidhyanagar','Vadtal']
     },
 
     count:{

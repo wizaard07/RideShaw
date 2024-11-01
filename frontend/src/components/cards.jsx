@@ -8,38 +8,45 @@ const Entries = ({ user }) => {
   const [loading, setLoading] = useState(true); // State for loading
   const [error, setError] = useState(null); // State for error handling
 
+  const [cityName, setCityName] = useState(''); // State for selected city
+  const [time, setTime] = useState(''); // State for selected time
+
+  // Sample data for city and time options
+  const cityOptions = ['Vadtal', 'Ahmedabad', 'Surat', 'Mumbai'];
+  const timeOptions = ['Morning', 'Afternoon', 'Evening', 'Night'];
+
   useEffect(() => {
     const fetchEntries = async () => {
       try {
+        let url = "http://localhost:3001/api/entry/get";
+        const queryParams = [];
+
+        if (cityName) queryParams.push(`city_name=${cityName}`);
+        if (time) queryParams.push(`time=${time}`);
+        
         if (user) {
           console.log("Fetching user-specific entries");
-          const response = await fetch("http://localhost:3001/api/user/entry", {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-          });
-
-          const res = await response.json()
-          console.log("User data:", res.entry);
-          setEntries(res.entry);
-        } 
-        
-        else {
+          url = "http://localhost:3001/api/user/entry"; // User-specific entries URL
+        } else {
           console.log("Fetching all entries");
-          const response = await fetch(`http://localhost:3001/api/entry/get?time=Morning`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-          });
-
-          const res = await response.json()
-          console.log("All data:", res);
-          setEntries(res);
+          // Default fetching with city and time filtering if user is not present
         }
+
+        if (queryParams.length) {
+          url += `?${queryParams.join('&')}`;
+        }
+
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        });
+
+        const res = await response.json();
+        console.log("Fetched entries:", res);
+        setEntries(res);
       } catch (err) {
         console.error("Error fetching entries:", err);
         setError('Failed to fetch entries. Please try again.');
@@ -49,7 +56,11 @@ const Entries = ({ user }) => {
     };
 
     fetchEntries();
-  }, [user]); // Depend on `user`
+  }, [user, cityName, time]); // Depend on user, cityName, and time
+
+  useEffect(() => {
+    console.log("entries:", entries); 
+  }, [entries]);
 
   if (loading) {
     return <div className="loading">Loading...</div>;
@@ -60,10 +71,28 @@ const Entries = ({ user }) => {
   }
 
   return (
-    <div className="city-grid">
-      {entries.map((entry) => (
-        <Card key={entry._id} entry={entry} />
-      ))}
+    <div className="entries-container">
+      <div className="filter-section">
+        <select value={cityName} onChange={(e) => setCityName(e.target.value)}>
+          <option value="">Select City</option>
+          {cityOptions.map((city) => (
+            <option key={city} value={city}>{city}</option>
+          ))}
+        </select>
+
+        <select value={time} onChange={(e) => setTime(e.target.value)}>
+          <option value="">Select Time</option>
+          {timeOptions.map((timeOption) => (
+            <option key={timeOption} value={timeOption}>{timeOption}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="city-grid">
+        {entries.map((entry) => (
+          <Card key={entry._id} entry={entry} userID={user ? user._id : null} />
+        ))}
+      </div>
     </div>
   );
 };
