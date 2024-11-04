@@ -37,7 +37,7 @@ exports.getUserEntry = async (req, res) => {
         let entry = await Entry.find({ reciver: user });
         console.log(entry)
 
-        return res.status(200).json({ entry: entry });
+        return res.status(200).json( entry );
 
     } catch (error) {
         console.log(error);

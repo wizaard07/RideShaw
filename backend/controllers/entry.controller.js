@@ -73,13 +73,13 @@ exports.getEntry = async (req, res) => {
         console.log(error);
         return res.status(500).json({ error: 'Internal server error' });
     }
-    
 }
 
 
 exports.getEntries = async (req, res) => {
 
     try {
+        
         let city = await req.query.city_name;
         let time = await req.query.time;
 
@@ -87,41 +87,43 @@ exports.getEntries = async (req, res) => {
 
         if (city && time) {
             let entries = await Entry.find({ city_name: city, time: time });
+            console.log(entries[0].city_name)
             if (entries) {
-                return res.status(200).json(entries);
+                return res.status(200).json(entries.entry);
             } else {
                 return res.status(404).json({ error: 'No entries found' });
             }
         }
 
-        else if(city){
+        else if(city && !time){
+            console.log(entries[0].city_name)
             let entries = await Entry.find({ city_name : city });
             if (entries) {
-                return res.status(200).json(entries);
+                return res.status(200).json(entries.entry);
             } else {
                 return res.status(404).json({ error: 'No entries found' });
             }
         }
 
-        else if(time){
+        else if(time && !city){
             let entries = await Entry.find({ time : time });
 
-            let response = []
-
-            entries.forEach(async(element) =>{
-                // console.log(element.reciver.toString())
-                let reciver = await User.findById(element.reciver.toString())
-                // console.log(reciver.username)
-            });           
-
+            console.log(entries[0].time)
             if (entries) {
-                return res.status(200).json(entries);
+                return res.status(200).json(entries.entry);
             } else {
                 return res.status(404).json({ error: 'No entries found' });
             }
         }
         else{
-           return res.status(404).json({ error: 'No entries found' });
+           let entries = await Entry.find();
+
+            if (entries) {
+                return res.status(200).json(entries);
+            } else {
+                return res.status(404).json({ error: 'No entries found' });
+            }
+            
         }
 
     } catch (error) {

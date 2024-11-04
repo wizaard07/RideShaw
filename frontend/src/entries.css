@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-    padding: 100px;
+    padding: 50px;
   }
   
   .loading, .error {
@@ -20,3 +20,15 @@
     color: #dc3545;
   }
   
+  .entries-container {
+    margin-top: 90px; /* Adjust this value based on your navbar height */
+  }
+
+
+  .filter-section {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    gap: 10px; /* Add space between the dropdowns */
+    margin-bottom: 20px; /* Add space below the filter section */
+    width: 100%; /* Ensure it takes full width for centering */
+  }

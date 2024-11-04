@@ -73,7 +73,7 @@ const UserProfile = () => {
 
       {/* Right side list of entries */}
       <div className="entries-list">
-        {user._id && <Entries user={user._id} />} {/* Render Entries only if user._id exists */}
+        {user._id && <Entries user={user._id} profile={true} />} {/* Render Entries only if user._id exists */}
       </div>
     </div>
   );

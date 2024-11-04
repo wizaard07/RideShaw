@@ -23,7 +23,6 @@ function App() {
         <Route path="/" element={<> <Home /></>} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        {/* <Route path="/counter" element={<Counter />} /> */}
         <Route path="/entries" element={<Entries />} />
         <Route path="/pending" element={<Pending />} />
       </Routes>

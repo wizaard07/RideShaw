@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Card from './card';
 import '../entries.css';  // Add a separate CSS file for styling
 
-const Entries = ({ user }) => {
+const Entries = ({ user, profile }) => {
+  console.log("profile:", profile);
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true); // State for loading
   const [error, setError] = useState(null); // State for error handling
@@ -18,6 +19,7 @@ const Entries = ({ user }) => {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
+        setEntries([]);
         let url = "http://localhost:3001/api/entry/get";
         const queryParams = [];
 
@@ -43,7 +45,7 @@ const Entries = ({ user }) => {
           },
           credentials: 'include',
         });
-
+        console.log(url)
         const res = await response.json();
         console.log("Fetched entries:", res);
         setEntries(res);
@@ -71,8 +73,11 @@ const Entries = ({ user }) => {
   }
 
   return (
+    
     <div className="entries-container">
-      <div className="filter-section">
+    {
+      !profile ? (
+        <div className="filter-section">
         <select value={cityName} onChange={(e) => setCityName(e.target.value)}>
           <option value="">Select City</option>
           {cityOptions.map((city) => (
@@ -86,7 +91,9 @@ const Entries = ({ user }) => {
             <option key={timeOption} value={timeOption}>{timeOption}</option>
           ))}
         </select>
-      </div>
+      </div>):
+      null
+    }
 
       <div className="city-grid">
         {entries.map((entry) => (
