@@ -87,19 +87,19 @@ exports.getEntries = async (req, res) => {
 
         if (city && time) {
             let entries = await Entry.find({ city_name: city, time: time });
-            console.log(entries[0].city_name)
+            // console.log(entries[0].city_name)
             if (entries) {
-                return res.status(200).json(entries.entry);
+                return res.status(200).json(entries);
             } else {
                 return res.status(404).json({ error: 'No entries found' });
             }
         }
 
         else if(city && !time){
-            console.log(entries[0].city_name)
             let entries = await Entry.find({ city_name : city });
+            console.log(entries)
             if (entries) {
-                return res.status(200).json(entries.entry);
+                return res.status(200).json(entries);
             } else {
                 return res.status(404).json({ error: 'No entries found' });
             }
@@ -110,7 +110,7 @@ exports.getEntries = async (req, res) => {
 
             console.log(entries[0].time)
             if (entries) {
-                return res.status(200).json(entries.entry);
+                return res.status(200).json(entries);
             } else {
                 return res.status(404).json({ error: 'No entries found' });
             }

@@ -4,7 +4,7 @@ import Card from './card';
 import '../entries.css';  // Add a separate CSS file for styling
 
 const Entries = ({ user, profile }) => {
-  console.log("profile:", profile);
+  // console.log("profile:", profile);
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true); // State for loading
   const [error, setError] = useState(null); // State for error handling
@@ -13,7 +13,7 @@ const Entries = ({ user, profile }) => {
   const [time, setTime] = useState(''); // State for selected time
 
   // Sample data for city and time options
-  const cityOptions = ['Vadtal', 'Ahmedabad', 'Surat', 'Mumbai'];
+  const cityOptions = ['Vadtal', 'Nadiad', 'Anand', 'Vidhyanagar'];
   const timeOptions = ['Morning', 'Afternoon', 'Evening', 'Night'];
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Entries = ({ user, profile }) => {
         setEntries([]);
         let url = "http://localhost:3001/api/entry/get";
         const queryParams = [];
-
+    
         if (cityName) queryParams.push(`city_name=${cityName}`);
         if (time) queryParams.push(`time=${time}`);
         
@@ -31,13 +31,12 @@ const Entries = ({ user, profile }) => {
           url = "http://localhost:3001/api/user/entry"; // User-specific entries URL
         } else {
           console.log("Fetching all entries");
-          // Default fetching with city and time filtering if user is not present
         }
-
+    
         if (queryParams.length) {
           url += `?${queryParams.join('&')}`;
         }
-
+    
         const response = await fetch(url, {
           method: 'GET',
           headers: {
@@ -45,9 +44,17 @@ const Entries = ({ user, profile }) => {
           },
           credentials: 'include',
         });
-        console.log(url)
-        const res = await response.json();
+        console.log("Request URL:", url);
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        // Attempt to parse JSON if available
+        const resText = await response.text();
+        const res = resText ? JSON.parse(resText) : [];
         console.log("Fetched entries:", res);
+    
         setEntries(res);
       } catch (err) {
         console.error("Error fetching entries:", err);
@@ -56,6 +63,7 @@ const Entries = ({ user, profile }) => {
         setLoading(false);
       }
     };
+    
 
     fetchEntries();
   }, [user, cityName, time]); // Depend on user, cityName, and time
